@@ -26,34 +26,6 @@ pipeline{
             steps{
                 sh 'docker stack deploy -c docker-compose.yml courses'
             }
-        }pipeline{
-    agent any
-    stages{
-        stage('chekout'){
-            steps{
-                git 'https://github.com/Kamal1508/dockermsproject.git'
-            }
-        }
-        stage('build'){
-            steps{
-                sh'docker build -t $img .'
-            }
-        }
-        stage('tag'){
-            steps{
-                sh'docker tag $img $repo'
-            }
-        }
-        stage('push'){
-            steps{
-                sh'docker login -u yaduvendramishra15 -p $pass'
-                sh 'docker push $repo'
-            }
-        }
-        stage('stack'){
-            steps{
-                sh 'docker stack deploy -c docker-compose.yml courses'
-            }
         }
     }
 }
